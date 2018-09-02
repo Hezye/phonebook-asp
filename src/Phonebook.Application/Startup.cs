@@ -32,7 +32,7 @@ namespace Phonebook.Application
             //    options => options.UseInMemoryDatabase("PhonebookDb"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -45,6 +45,10 @@ namespace Phonebook.Application
             builder.RegisterModule(new AutofacModule());
         }
 
+        /// <summary>
+        /// Configure container for development environment
+        /// </summary>
+        /// <param name="builder"></param>
         public void ConfigureDevelopmentContainer(ContainerBuilder builder)
         {
             builder.RegisterModule(new AutofacModuleDevelopment());
@@ -64,10 +68,6 @@ namespace Phonebook.Application
 
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-
-            //app.UseMiddleware<RequestResponseLoggingMiddleware>(
-            //    RequestResponseLoggingMiddleware.LoggingType.Request |
-            //    RequestResponseLoggingMiddleware.LoggingType.Response);
 
             app.UseMvc(routes =>
             {
