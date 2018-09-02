@@ -1,0 +1,56 @@
+<div class="panel">
+  <div class="panel-heading clearfix">
+    <h3 class="panel-title pull-left">Phone entries</h3>
+    <div class="btn-group pull-right">
+      <button href="#" class="btn btn-primary btn-sm" (click)="openModal(template)">+</button>
+    </div>
+  </div>
+  <table class='table' *ngIf="phoneEntries">
+    <thead>
+      <tr>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Phone number</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let entry of phoneEntries">
+        <td>{{ entry.firstName }}</td>
+        <td>{{ entry.lastName }}</td>
+        <td>{{ entry.phoneNumber }}</td>
+        <td>
+          <a (click)="delete(entry)" class="clickable">
+            <span class='glyphicon glyphicon-remove' aria-hidden="true"></span>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">New phone entry</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form (submit)="add()">
+      <div class="form-group">
+        <label for="firstNameInput">First name</label>
+        <input type="text" required [(ngModel)]="newEntry.firstName" class="form-control" id="firstNameInput" name="firstName">
+      </div>
+      <div class="form-group">
+        <label for="lastNameInput">Last name</label>
+        <input type="text" [(ngModel)]="newEntry.lastName" class="form-control" id="lastNameInput" name="lastName">
+      </div>
+      <div class="form-group">
+        <label for="phoneInput">Phone number</label>
+        <input type="text" required [(ngModel)]="newEntry.phoneNumber" class="form-control" id="phoneInput" name="phone">
+      </div>
+      <button type="submit" class="btn btn-default">Add</button>
+    </form>
+  </div>
+</ng-template>
